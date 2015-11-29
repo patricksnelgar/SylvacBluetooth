@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="Record Settings">
+        <SwitchPreference
+                android:title="Enable editing"
+                android:defaultValue="true"
+                android:key="editing_enabled"
+                android:summary="Allow for removal of incorrect entries in the History window"
+                />
+        <SwitchPreference
+                android:title="Auto add records"
+                android:defaultValue="true"
+                android:key="auto_add_enabled"
+                android:summary="Automatically add records to the History window"
+                />
+        <EditTextPreference
+            android:title="Entries"
+            android:defaultValue="3"
+            android:key="entries_per_record"
+            android:summary="Set the number of measurement per vine"
+            />
+    </PreferenceCategory>
+</PreferenceScreen>

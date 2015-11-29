@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sylvac Calipers</string>
+    <string name="stringHeaderText">Discovered devices</string>
+    <string name="stringStatus">Status:</string>
+    <string name="stringMeasurementLabel">Previous measurement:</string>
+    <string name="stringStatusIdle">Idle</string>
+    <string name="stringNullMeasurement"/>
+</resources>
