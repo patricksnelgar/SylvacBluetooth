@@ -13,13 +13,23 @@
             android:headerDividersEnabled="true" android:smoothScrollbar="true" android:stackFromBottom="true"
             android:nestedScrollingEnabled="false"
             android:layout_marginBottom="10dp"/>
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="17    +0012.36    +0000.02    +0007.64"
-            android:id="@+id/textCurrent" android:paddingTop="5dip" android:paddingBottom="5dip"
-            android:layout_marginBottom="10dip" android:textSize="20sp" android:paddingStart="5dp"
-            android:singleLine="false"
-            />
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" android:weightSum="100">
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/textEntryID" android:layout_weight="15"
+                android:textAppearance="?android:attr/textAppearanceLarge" android:textAlignment="center"
+                android:password="false" android:gravity="center_horizontal"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/textCurrentMeasurements" android:paddingTop="5dip" android:paddingBottom="5dip"
+                android:textSize="20sp" android:paddingStart="5dp"
+                android:singleLine="false"
+                android:layout_weight="85" android:gravity="right" android:paddingRight="10dip"/>
+    </LinearLayout>
 </LinearLayout>

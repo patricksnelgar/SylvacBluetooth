@@ -27,33 +27,30 @@ public class DataReceiver extends BroadcastReceiver {
 	private final RecordActivity mParentActivity;
 	private final String tab = "    ";
 	private TextView mCurrentRecord;
+	private TextView mCurrentEntryID;
 	private ListView mHistory;
 	private Button mAddRecord;
 	private Handler mHandler = new Handler(Looper.getMainLooper());
-	private int mIdCount = 9;
+	private int mIdCount = 1;
 	private int mMeasurementCount = 0;
 	private boolean AUTO_ADD = true;
-	private int measurementsPerRecord = 0;
-	private List<String> listRecords;
-	private ArrayAdapter<String> listRecordsAdapter;
+	private int measurementsPerRecord = 3;
+	private List<Entry> listRecords;
+	private EntryAdapter listRecordsAdapter;
 
 	private SharedPreferences mSharedPrefs;
 
 	public DataReceiver(RecordActivity pRecordActivity){
 		this.mParentActivity = pRecordActivity;
-		mCurrentRecord = (TextView) mParentActivity.findViewById(R.id.textCurrent);
+		mCurrentRecord = (TextView) mParentActivity.findViewById(R.id.textCurrentMeasurements);
+		mCurrentEntryID = (TextView) mParentActivity.findViewById(R.id.textEntryID);
 		listRecords = new ArrayList<>();
-		listRecordsAdapter = new ArrayAdapter<String>(mParentActivity, R.layout.data_entry, listRecords);
+		listRecordsAdapter = new EntryAdapter(mParentActivity, R.layout.single_entry, listRecords);
 		mHistory = (ListView) mParentActivity.findViewById(R.id.listHistory);
 
+		mCurrentEntryID.setText(String.valueOf(mIdCount++));
 
-		//mCurrentRecord.setText(String.valueOf(mIdCount++)+"  ");
-		mCurrentRecord.setText("9      +0000.05    +0000.05    +0000.05\n" +
-				               "10     +0000.05    +0000.05    +0000.05");
 		mHistory.setAdapter(listRecordsAdapter);
-
-		listRecords.add("9      +0000.05    +0000.05    +0000.05");
-		listRecords.add("10     +0000.05    +0000.05    +0000.05");
 		listRecordsAdapter.notifyDataSetChanged();
 	}
 
@@ -67,23 +64,17 @@ public class DataReceiver extends BroadcastReceiver {
 					// TODO
 					// extract current record and insert into the history list
 					// notify dataset changed...
-					listRecords.add(mCurrentRecord.getText().toString());
+					Entry newEntry = new Entry(mCurrentEntryID.getText().toString(), mCurrentRecord.getText().toString());
+					listRecords.add(newEntry);
 					listRecordsAdapter.notifyDataSetChanged();
-
 					scrollList();
-					if(mIdCount < 10){
-						mCurrentRecord.setText(String.valueOf(mIdCount++)+"  ");
-					} else if(mIdCount < 100){
-						mCurrentRecord.setText(String.valueOf(mIdCount++)+" ");
-					} else {
-						mCurrentRecord.setText(String.valueOf(mIdCount++));
-					}
-
 
 					Log.i(TAG, "'" + String.format("%1$-3s", String.valueOf(mIdCount)) + "'" + data + "'");
 					mMeasurementCount = 0;
+					mCurrentEntryID.setText(String.valueOf(mIdCount++));
+					mCurrentRecord.setText("");
 				}
-				mCurrentRecord.append(String.format("%1$12s",data));
+				mCurrentRecord.append(data+"   ");
 				mMeasurementCount++;
 				break;
 			}
