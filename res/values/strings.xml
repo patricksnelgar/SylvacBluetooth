@@ -6,4 +6,5 @@
     <string name="stringMeasurementLabel">Previous measurement:</string>
     <string name="stringStatusIdle">Idle</string>
     <string name="stringNullMeasurement"/>
+    <string name="EntryCountDefault">1</string>
 </resources>
